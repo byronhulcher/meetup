@@ -3,6 +3,11 @@ var EventView = Backbone.View.extend({
     events: {
         "click .favorite-toggle": "toggleFavorite"
     },
+    initialize: function() {
+        favorited = Cookies.get(this.model.cookieName());
+        this.model.set('favorite', favorited ? true : false);
+        console.log(this.model.get('favorite'));
+    },
     render: function() {
         template = _.template($("#event-template").html());
         var event_html = $(template({model:this.model}));

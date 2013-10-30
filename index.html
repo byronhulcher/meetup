@@ -13,6 +13,9 @@
     </script>
     <script src="http://backbonejs.org/backbone.js"></script>
 
+    <!-- Cookies.js from https://github.com/ScottHamper/Cookies -->
+    <script src="/js/cookies.js"></script>
+
     <!-- My Backbone.js code -->
     <script src="/js/models.js"></script>
     <script src="/js/collections.js"></script>
@@ -41,11 +44,11 @@
         <div id="event-template">
                 <a href="{{ model.get('event_url') }}">{{ model.get('name') }}</a>
                 <span class="favorite">
-                    Favorite: 
+                    Favorited: 
                     {{#  if (model.get('favorite')){ }}
-                        on
+                        ON
                     {{# } else { }}
-                        off
+                        OFF
                     {{# } }}
                     <a href='#' class="favorite-toggle">toggle</a>
                 </span>
