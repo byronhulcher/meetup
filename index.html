@@ -1,5 +1,7 @@
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
     <!--External Javascript libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://underscorejs.org/underscore.js"></script>
@@ -36,27 +38,23 @@
 <body>
     <h1>TOP 10 EVENTS IN YOUR AREA</h1>
     <div id="events">
-        <ol id="events-list">
-        </ol>
+        <div id="events-list">
+        </div>
     </div>
 
     <div id="templates" style="display:none">
         <div id="event-template">
-                <a href="{{ model.get('event_url') }}">{{ model.get('name') }}</a>
-                <span class="favorite">
-                    Favorited: 
-                    {{#  if (model.get('favorite')){ }}
-                        ON
-                    {{# } else { }}
-                        OFF
-                    {{# } }}
-                    <a href='#' class="favorite-toggle">toggle</a>
-                </span>
-                <ul>
-                    <li>Group Name: {{ model.get('group')['name'] }}</li>
-                    <li>Time: {{ new Date(model.get('time')) }}</li>
-                    <li>Attending: {{ model.get('yes_rsvp_count') }}</li>
-                </ul>
+            <div class="name-wrapper">
+                <div class='event-name'><a href="{{ model.get('event_url') }}">{{ model.get('name') }}</a></div>
+                <div height='20px' width='20px' class="favorite-star favorite-{{#  if (model.get('favorite')){ }}on{{# } else { }}off{{# } }}">&nbsp;</div>
+            </div>
+            <div style="clear:both"></div>
+            <ul>
+                <li>Group Name: {{ model.get('group')['name'] }}</li>
+                <li>Time: {{ new Date(model.get('time')) }}</li>
+                <li>Attending: {{ model.get('yes_rsvp_count') }}</li>
+            </ul>
+                
         </div>
     </div>
 </body>

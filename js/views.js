@@ -1,7 +1,8 @@
 var EventView = Backbone.View.extend({
-    tagName:  "li",
+    tagName:  "div",
     events: {
-        "click .favorite-toggle": "toggleFavorite"
+        "click .favorite-toggle": "toggleFavorite",
+        "click .favorite-star": "toggleFavorite"
     },
     initialize: function() {
         favorited = Cookies.get(this.model.cookieName());
@@ -37,7 +38,7 @@ var AppView = Backbone.View.extend({
         this.events.fetch({
             data: {
                 'key': MEETUP_API_KEY,
-                'page': 40,
+                'page': 30,
                 'zip': 10002,
                 'order': 'trending',
                 'desc': true,
