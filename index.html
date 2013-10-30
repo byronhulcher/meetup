@@ -1,0 +1,32 @@
+<html>
+<head>
+    <!--External Javascript libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://underscorejs.org/underscore.js"></script>
+    <script src="http://backbonejs.org/backbone.js"></script>
+    
+    <!-- My Backbone.js code -->
+    <script src="/js/models.js"></script>
+    <script src="/js/collections.js"></script>
+    <script src="/js/views.js"></script>
+
+    <!-- My Backbone.js code -->
+    <script type="text/javascript">
+
+        MEETUP_API_KEY = '6752511f3291b2b182ee4d2ef312'; //Provided by Emily in e-mail
+
+        $(document).ready(function(){
+            app = new AppView;
+        });
+    </script>
+
+</head>
+
+<body>
+    <h1>Meetup coding assignment v0.1</h1>
+    <div id="events">
+        <ul id="events-list">
+        </ul>
+    </div>
+</body>
+</html>
