@@ -1,6 +1,10 @@
 #events{
     margin-left:40px;
 }
+#warning{
+    margin: 0 20px;
+    display: inline-block;
+}
 .navbar .navbar-nav>.active>a{
     background-color: #ECECEC !important; 
 }

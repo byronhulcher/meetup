@@ -26,7 +26,8 @@ var AppView = Backbone.View.extend({
     time:'0d,1m',
     zip: 10002,
     events: {
-        "click li:not(.active) .city": "selectedCity"
+        "click li:not(.active) .city": "selectedCity",
+        "click button.zip-submit": "searchForZip",
     },
     initialize: function(){
         this.meetup_events = new EventCollection;
@@ -47,13 +48,18 @@ var AppView = Backbone.View.extend({
             },
             success: function(collection, data){
                 self.render();
-            }
+            },
         });
     },
     render: function(){
         $("#events-list").empty();
         var slice = this.meetup_events.slice(0,10);
         _.each(slice, this.addOne);
+        if (slice.length == 0){
+            $('#warning').show();
+        } else {
+            $('#warning').hide();
+        }
     },
     addOne: function(event){
         var view = new EventView({model:event});
@@ -62,8 +68,15 @@ var AppView = Backbone.View.extend({
     selectedCity: function(event){
         event.stopPropagation();
         $('.navbar-nav li').removeClass('active');
+        $('.zip-input').val('');
         $(event.target).parent().addClass('active');
         this.zip = $(event.target).data('zip');
+        this.refresh();
+    },
+    searchForZip: function(event){
+        event.stopPropagation();
+        $('.navbar-nav li').removeClass('active');
+        this.zip = $('.zip-input').val();
         this.refresh();
     }
 });
