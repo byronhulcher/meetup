@@ -7,7 +7,6 @@ var EventView = Backbone.View.extend({
     initialize: function() {
         favorited = Cookies.get(this.model.cookieName());
         this.model.set('favorite', favorited ? true : false);
-        console.log(this.model.get('favorite'));
     },
     render: function() {
         template = _.template($("#event-template").html());
@@ -23,11 +22,11 @@ var EventView = Backbone.View.extend({
 });
 
 var AppView = Backbone.View.extend({
-    el: "#events",
+    el: "#app",
     time:'0d,1m',
-    zip: 11226,
+    zip: 10002,
     events: {
-        "click .city": "selectedCity"
+        "click li:not(.active) .city": "selectedCity"
     },
     initialize: function(){
         this.meetup_events = new EventCollection;
@@ -57,13 +56,14 @@ var AppView = Backbone.View.extend({
         _.each(slice, this.addOne);
     },
     addOne: function(event){
-        console.log(event.attributes);
         var view = new EventView({model:event});
         $("#events-list").append(view.render().el);
     },
     selectedCity: function(event){
+        event.stopPropagation();
+        $('.navbar-nav li').removeClass('active');
+        $(event.target).parent().addClass('active');
         this.zip = $(event.target).data('zip');
-        console.log(this.zip);
         this.refresh();
     }
 });

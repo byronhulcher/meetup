@@ -1,6 +1,8 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
 
     <!--External Javascript libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -14,6 +16,7 @@
         };
     </script>
     <script src="http://backbonejs.org/backbone.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
     <!-- Cookies.js from https://github.com/ScottHamper/Cookies -->
     <script src="/js/cookies.js"></script>
@@ -36,15 +39,32 @@
 </head>
 
 <body>
-    <h1>TOP 10 EVENTS IN YOUR AREA</h1>
-    <div id="events">
-        <a href='#' class="city" data-zip="10002">Manhattan</a>
-        <a href='#' class="city" data-zip="11226">Brooklyn </a>
-        <br />
-        <br />
-        <div id="events-list">
+    <div id="app">
+        <nav class="navbar navbar-default" role="navigation">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Top 10 Meetups In Your Area!</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href='#' class="city" data-zip="10002">Manhattan</a></li>
+              <li><a href="#" class="city" data-zip="11226">Brooklyn</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </nav>
+        <div id="events">
+            <div id="events-list">
+            </div>
         </div>
-    </div>
+    </app>
 
     <div id="templates" style="display:none">
         <div id="event-template">
