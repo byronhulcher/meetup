@@ -1,20 +1,14 @@
 <html>
 <head>
+    <!-- My stylesheet -->
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+    <!-- Bootstrap's stylesheet -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-    
 
     <!--External Javascript libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://underscorejs.org/underscore.js"></script>
-    <script>
-        // via http://stackoverflow.com/questions/9002203/
-        _.templateSettings = {
-          evaluate:    /\{\{#([\s\S]+?)\}\}/g,            // {{# console.log("blah") }}
-          interpolate: /\{\{[^#\{]([\s\S]+?)[^\}]\}\}/g,  // {{ title }}
-          escape:      /\{\{\{([\s\S]+?)\}\}\}/g,         // {{{ title }}}
-        };
-    </script>
     <script src="http://backbonejs.org/backbone.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
@@ -27,7 +21,16 @@
     <script src="/js/collections.js"></script>
     <script src="/js/views.js"></script>
 
-    <!-- My Backbone.js code -->
+    <!-- Moustache style templating via http://stackoverflow.com/questions/9002203/ -->
+    <script>
+        _.templateSettings = {
+          evaluate:    /\{\{#([\s\S]+?)\}\}/g,            // {{# console.log("blah") }}
+          interpolate: /\{\{[^#\{]([\s\S]+?)[^\}]\}\}/g,  // {{ title }}
+          escape:      /\{\{\{([\s\S]+?)\}\}\}/g,         // {{{ title }}}
+        };
+    </script>
+
+    <!-- My own code -->
     <script type="text/javascript">
 
         MEETUP_API_KEY = '6752511f3291b2b182ee4d2ef312'; //Provided by Emily in e-mail
@@ -66,10 +69,16 @@
                 </form>
             </div><!-- /.navbar-collapse -->
         </nav>
+
         <div id="events">
+            <div class="alert alert-dismissable alert-warning">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Instructions:</strong> Use the navbar above to switch between zip codes. Click the star icon to favorite an event.
+            </div>
             <div id="events-list">
             </div>
         </div>
+
         <div class="alert alert-danger" id="warning" style="display:none">
             <strong>We didn't get any results.  Most likely, you input a bad zip code.</strong>
         </div>
@@ -79,8 +88,12 @@
         <div id="event-template">
             <div class="panel panel-primary">
                 <div class="panel-heading" style="position:relative">
-                    <div height='20px' width='20px' class="favorite-star favorite-{{#  if (model.get('favorite')){ }}on{{# } else { }}off{{# } }}">&nbsp;</div>
-                    <h3 style="margin-left:20px;" class="panel-title">{{ model.get('name') }} </h3>
+                    <div class="favorite-star favorite-{{#  if (model.get('favorite')){ }}on{{# } else { }}off{{# } }}">&nbsp;</div>
+                    <h3 class="panel-title">
+                        <a href="{{ model.get('event_url') }}" title="{{ model.get('name') }}" target="_blank">
+                            {{ model.get('name') }}
+                        </a>
+                    </h3>
                 </div>
                 <div style="clear:both"></div>
                 <div class="panel-body">

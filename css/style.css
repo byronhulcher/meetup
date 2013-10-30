@@ -8,6 +8,9 @@
 .navbar .navbar-nav>.active>a{
     background-color: #ECECEC !important; 
 }
+h3.panel-title{
+    margin-left:20px;
+}
 .name-wrapper{
     position:relative;
 }
