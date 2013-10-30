@@ -1,6 +1,5 @@
 var EventView = Backbone.View.extend({
     tagName:  "li",
-    template_el: $("#event-template");
     render: function() {
         var link = $('<a />', {
             id:'event_'+this.model.id,
@@ -10,9 +9,8 @@ var EventView = Backbone.View.extend({
         this.$el.html(link);
 
         var list = $('<ul />');
-        _.each(this.model.attributes, function(value, attribute){
-            $('<li />').text(attribute + ": " + value).appendTo(list);
-        });
+        template = _.template($("#event-template").html());
+        list.append(template({model:this.model}));
         this.$el.append(list);
         return this;
     },

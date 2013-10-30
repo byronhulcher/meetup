@@ -3,6 +3,14 @@
     <!--External Javascript libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://underscorejs.org/underscore.js"></script>
+    <script>
+        // via http://stackoverflow.com/questions/9002203/backbone-underscore-template-in-mustache-format-causing-error-on-pound-hash-sy 
+        _.templateSettings = {
+          evaluate:    /\{\{#([\s\S]+?)\}\}/g,            // {{# console.log("blah") }}
+          interpolate: /\{\{[^#\{]([\s\S]+?)[^\}]\}\}/g,  // {{ title }}
+          escape:      /\{\{\{([\s\S]+?)\}\}\}/g,         // {{{ title }}}
+        };
+    </script>
     <script src="http://backbonejs.org/backbone.js"></script>
 
     <!-- My Backbone.js code -->
@@ -25,8 +33,15 @@
 <body>
     <h1>Meetup coding assignment v0.1</h1>
     <div id="events">
-        <ul id="events-list">
-        </ul>
+        <ol id="events-list">
+        </ol>
+    </div>
+
+    <div id="templates" style="display:none">
+        <div id="event-template">
+            <li>Name: {{ model.get('name') }}</li>
+            <li>Group Name: {{ model.get('group')['name'] }}</li>
+        </div>
     </div>
 </body>
 </html>
