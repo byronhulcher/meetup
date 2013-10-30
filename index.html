@@ -2,8 +2,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-    
-
     <!--External Javascript libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://underscorejs.org/underscore.js"></script>
@@ -67,6 +65,10 @@
             </div><!-- /.navbar-collapse -->
         </nav>
         <div id="events">
+            <div class="alert alert-dismissable alert-warning">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Instructions:</strong> Use the navbar above to switch between zip codes. Click the star icon to favorite an event.
+            </div>
             <div id="events-list">
             </div>
         </div>
@@ -80,7 +82,11 @@
             <div class="panel panel-primary">
                 <div class="panel-heading" style="position:relative">
                     <div height='20px' width='20px' class="favorite-star favorite-{{#  if (model.get('favorite')){ }}on{{# } else { }}off{{# } }}">&nbsp;</div>
-                    <h3 style="margin-left:20px;" class="panel-title">{{ model.get('name') }} </h3>
+                    <h3 style="margin-left:20px;" class="panel-title">
+                        <a href="{{ model.get('event_url') }}" title="{{ model.get('name') }}" target="_blank">
+                            {{ model.get('name') }}
+                        </a>
+                    </h3>
                 </div>
                 <div style="clear:both"></div>
                 <div class="panel-body">
