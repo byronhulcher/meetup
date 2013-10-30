@@ -31,7 +31,7 @@
 </head>
 
 <body>
-    <h1>Meetup coding assignment v0.1</h1>
+    <h1>TOP 10 EVENTS IN YOUR AREA</h1>
     <div id="events">
         <ol id="events-list">
         </ol>
@@ -39,8 +39,12 @@
 
     <div id="templates" style="display:none">
         <div id="event-template">
-            <li>Name: {{ model.get('name') }}</li>
-            <li>Group Name: {{ model.get('group')['name'] }}</li>
+                <a href="{{ model.get('event_url') }}">{{ model.get('name') }}</a>
+                <ul>
+                    <li>Group Name: {{ model.get('group')['name'] }}</li>
+                    <li>Time: {{ new Date(model.get('time')) }}</li>
+                    <li>Attending: {{ model.get('yes_rsvp_count') }}</li>
+                </ul>
         </div>
     </div>
 </body>

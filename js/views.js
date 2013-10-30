@@ -1,17 +1,10 @@
 var EventView = Backbone.View.extend({
     tagName:  "li",
     render: function() {
-        var link = $('<a />', {
-            id:'event_'+this.model.id,
-            href: this.model.get('event_url'),
-            target: '_blank'
-        }).text(this.model.get('name'));
-        this.$el.html(link);
-
-        var list = $('<ul />');
+        console.log(this.model.attributes);
         template = _.template($("#event-template").html());
-        list.append(template({model:this.model}));
-        this.$el.append(list);
+        var event_html = $(template({model:this.model}));
+        this.$el.html(event_html);
         return this;
     },
 
@@ -19,17 +12,25 @@ var EventView = Backbone.View.extend({
 
 var AppView = Backbone.View.extend({
     el: $("#events"),
+    time:'0d,1m',
     initialize: function(){
-        var self = this;
         this.events = new EventCollection;
         //this.listenTo(this.events, 'add', this.addOne);
         //this.listenTo(this.events, 'reset', this.addAll);
         //this.listenTo(this.events, 'all', this.render);
+        this.refresh();
+        
+    },
+    refresh: function(){
+        var self = this;
         this.events.fetch({
             data: {
                 'key': MEETUP_API_KEY,
                 'page': 40,
-                'zip': 11226,
+                'zip': 10002,
+                'order': 'trending',
+                'desc': true,
+                'time': this.time,
             },
             remove: false,
             success: function(collection, data){
