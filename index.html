@@ -17,6 +17,7 @@
     </script>
     <script src="http://backbonejs.org/backbone.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
 
     <!-- Cookies.js from https://github.com/ScottHamper/Cookies -->
     <script src="/js/cookies.js"></script>
@@ -74,17 +75,21 @@
 
     <div id="templates" style="display:none">
         <div id="event-template">
-            <div class="name-wrapper">
-                <div class='event-name'><a href="{{ model.get('event_url') }}">{{ model.get('name') }}</a></div>
-                <div height='20px' width='20px' class="favorite-star favorite-{{#  if (model.get('favorite')){ }}on{{# } else { }}off{{# } }}">&nbsp;</div>
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="position:relative">
+                    <div height='20px' width='20px' class="favorite-star favorite-{{#  if (model.get('favorite')){ }}on{{# } else { }}off{{# } }}">&nbsp;</div>
+                    <h3 style="margin-left:20px;" class="panel-title">{{ model.get('name') }} </h3>
+                </div>
+                <div style="clear:both"></div>
+                <div class="panel-body">
+                    <ul>
+                        <li>Group Name: {{ model.get('group')['name'] }}</li>
+                        <li>Time: {{ moment(new Date(model.get('time'))).format('LLLL') }}</li>
+                        <li>Attending: {{ model.get('yes_rsvp_count') }}</li>
+                        <li>Event URL: <a href="{{ model.get('event_url') }}" title="{{ model.get('name') }}" target="_blank">{{ model.get('event_url') }}</a></li>
+                    </ul>
+                </div>
             </div>
-            <div style="clear:both"></div>
-            <ul>
-                <li>Group Name: {{ model.get('group')['name'] }}</li>
-                <li>Time: {{ new Date(model.get('time')) }}</li>
-                <li>Attending: {{ model.get('yes_rsvp_count') }}</li>
-            </ul>
-                
         </div>
     </div>
 </body>
