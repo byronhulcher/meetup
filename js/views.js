@@ -23,35 +23,37 @@ var EventView = Backbone.View.extend({
 });
 
 var AppView = Backbone.View.extend({
-    el: $("#events"),
+    el: "#events",
     time:'0d,1m',
+    zip: 11226,
+    events: {
+        "click .city": "selectedCity"
+    },
     initialize: function(){
-        this.events = new EventCollection;
-        //this.listenTo(this.events, 'add', this.addOne);
-        //this.listenTo(this.events, 'reset', this.addAll);
-        //this.listenTo(this.events, 'all', this.render);
+        this.meetup_events = new EventCollection;
         this.refresh();
         
     },
     refresh: function(){
         var self = this;
-        this.events.fetch({
+        this.meetup_events.fetch({
             data: {
                 'key': MEETUP_API_KEY,
                 'page': 30,
-                'zip': 10002,
+                'zip': this.zip,
+                'radius': 5,
                 'order': 'trending',
                 'desc': true,
                 'time': this.time,
             },
-            remove: false,
             success: function(collection, data){
                 self.render();
             }
         });
     },
     render: function(){
-        var slice = this.events.slice(0,10);
+        $("#events-list").empty();
+        var slice = this.meetup_events.slice(0,10);
         _.each(slice, this.addOne);
     },
     addOne: function(event){
@@ -59,6 +61,9 @@ var AppView = Backbone.View.extend({
         var view = new EventView({model:event});
         $("#events-list").append(view.render().el);
     },
-    addAll: function(){
+    selectedCity: function(event){
+        this.zip = $(event.target).data('zip');
+        console.log(this.zip);
+        this.refresh();
     }
 });
