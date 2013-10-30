@@ -10,3 +10,5 @@ From the console, run
 Then navigate your browser (I suggest Chrome) to http://0.0.0.0:8000/index.html
 ```
 If you have any questions, don't hesitate to ask!
+
+<img src="https://raw.github.com/byronhulcher/meetup/master/screenshot.png" width="400px"></img>
