@@ -1,13 +1,19 @@
 var EventView = Backbone.View.extend({
     tagName:  "li",
+    events: {
+        "click .favorite-toggle": "toggleFavorite"
+    },
     render: function() {
-        console.log(this.model.attributes);
         template = _.template($("#event-template").html());
         var event_html = $(template({model:this.model}));
         this.$el.html(event_html);
         return this;
     },
-
+    toggleFavorite: function(event){
+        event.stopPropagation();
+        this.model.toggleFavorite();
+        this.render();
+    }
 });
 
 var AppView = Backbone.View.extend({
@@ -43,6 +49,7 @@ var AppView = Backbone.View.extend({
         _.each(slice, this.addOne);
     },
     addOne: function(event){
+        console.log(event.attributes);
         var view = new EventView({model:event});
         $("#events-list").append(view.render().el);
     },

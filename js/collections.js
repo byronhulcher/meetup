@@ -14,5 +14,5 @@ var EventCollection = Backbone.Collection.extend({
     sync: function(method, model, options){  // jsonp hack via http://iainjmitchell.com/blog/?p=777
         options.dataType = "jsonp";  
         return Backbone.sync(method, model, options);  
-    }
+    },
 });

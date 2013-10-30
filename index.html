@@ -4,7 +4,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://underscorejs.org/underscore.js"></script>
     <script>
-        // via http://stackoverflow.com/questions/9002203/backbone-underscore-template-in-mustache-format-causing-error-on-pound-hash-sy 
+        // via http://stackoverflow.com/questions/9002203/
         _.templateSettings = {
           evaluate:    /\{\{#([\s\S]+?)\}\}/g,            // {{# console.log("blah") }}
           interpolate: /\{\{[^#\{]([\s\S]+?)[^\}]\}\}/g,  // {{ title }}
@@ -40,6 +40,15 @@
     <div id="templates" style="display:none">
         <div id="event-template">
                 <a href="{{ model.get('event_url') }}">{{ model.get('name') }}</a>
+                <span class="favorite">
+                    Favorite: 
+                    {{#  if (model.get('favorite')){ }}
+                        on
+                    {{# } else { }}
+                        off
+                    {{# } }}
+                    <a href='#' class="favorite-toggle">toggle</a>
+                </span>
                 <ul>
                     <li>Group Name: {{ model.get('group')['name'] }}</li>
                     <li>Time: {{ new Date(model.get('time')) }}</li>
