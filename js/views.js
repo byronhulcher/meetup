@@ -78,5 +78,6 @@ var AppView = Backbone.View.extend({
         $('.navbar-nav li').removeClass('active');
         this.zip = $('.zip-input').val();
         this.refresh();
+        return false;
     }
 });
